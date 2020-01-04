@@ -1,21 +1,12 @@
 *** a/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 05:08:34.104996800 -0500
 --- b/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 05:22:11.963106500 -0500
 ***************
-*** 38,44 ****
-  $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
+*** 39,44 ****
+--- 39,45 ----
   $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
   $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/device-vendor.mk)
-! PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-  # STOPSHIP deal with Qualcomm stuff later
-  # PRODUCT_RESTRICT_VENDOR_FILES := all
-  PRODUCT_MANUFACTURER := Google
---- 38,46 ----
-  $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
-  $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
-  $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/device-vendor.mk)
-! PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-! frameworks/native/data/etc/aosp_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/aosp_excluded_hardware.xml
-! PRODUCT_RESTRICT_VENDOR_FILES := false
+  PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
++ PRODUCT_RESTRICT_VENDOR_FILES := false
   # STOPSHIP deal with Qualcomm stuff later
   # PRODUCT_RESTRICT_VENDOR_FILES := all
   PRODUCT_MANUFACTURER := Google
