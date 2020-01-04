@@ -1,38 +1,25 @@
-*** a/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 05:08:34.104996800 -0500
---- b/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 05:22:11.963106500 -0500
-***************
-*** 39,44 ****
---- 39,45 ----
-  $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
-  $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/device-vendor.mk)
-  PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
-+ PRODUCT_RESTRICT_VENDOR_FILES := false
-  # STOPSHIP deal with Qualcomm stuff later
-  # PRODUCT_RESTRICT_VENDOR_FILES := all
-  PRODUCT_MANUFACTURER := Google
-*** a/device/google/crosshatch/device-crosshatch.mk  2020-01-04 05:26:33.197519900 -0500
---- b/device/google/crosshatch/device-crosshatch     2020-01-04 05:27:00.768521000 -0500
-***************
-*** 13,18 ****
---- 13,19 ----
-  # See the License for the specific language governing permissions and
-  # limitations under the License.
-  #
-+ GAPPS_VARIANT := pico
-  PRODUCT_HARDWARE := crosshatch
-  include device/google/crosshatch/device-common.mk
-  DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
-***************
-*** 26,29 ****
-  PRODUCT_COPY_FILES += \
-      device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
-  PRODUCT_PACKAGES += \
-!     NoCutoutOverlay
-\ No newline at end of file
---- 27,31 ----
-  PRODUCT_COPY_FILES += \
-      device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
-  PRODUCT_PACKAGES += \
-!     NoCutoutOverlay
-! $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
-\ No newline at end of file
+--- a/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 11:42:41.045071657 +0000
++++ b/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 11:44:12.564349001 +0000
+@@ -22,6 +22,7 @@
+ $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/device-vendor.mk)
+ 
+ PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
++PRODUCT_RESTRICT_VENDOR_FILES := false
+ 
+ # STOPSHIP deal with Qualcomm stuff later
+ # PRODUCT_RESTRICT_VENDOR_FILES := all
+--- a/device/google/crosshatch/device-crosshatch.mk	2020-01-04 11:42:41.097071133 +0000
++++ b/device/google/crosshatch/device-crosshatch.mk.2	2020-01-04 11:44:47.964147383 +0000
+@@ -14,6 +14,7 @@
+ # limitations under the License.
+ #
+ 
++GAPPS_VARIANT := pico
+ PRODUCT_HARDWARE := crosshatch
+ 
+ include device/google/crosshatch/device-common.mk
+@@ -34,3 +35,4 @@
+ 
+ PRODUCT_PACKAGES += \
+     NoCutoutOverlay
++$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
