@@ -1,40 +1,47 @@
-*** a/device/google/crosshatch/aosp_crosshatch.mk	2019-08-20 23:38:14.000000000 -0300
---- b/device/google/crosshatch/aosp_crosshatch.mk	2019-08-20 23:45:46.722647171 -0300
+*** a/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 05:08:34.104996800 -0500
+--- b/device/google/crosshatch/aosp_crosshatch.mk	2020-01-04 05:22:11.963106500 -0500
 ***************
-*** 33,39 ****
-      device/google/crosshatch/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-      frameworks/native/data/etc/aosp_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/aosp_excluded_hardware.xml
-  
-! PRODUCT_RESTRICT_VENDOR_FILES := owner
-  
+*** 38,44 ****
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
+  $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
+  $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/device-vendor.mk)
+! PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml
+  # STOPSHIP deal with Qualcomm stuff later
+  # PRODUCT_RESTRICT_VENDOR_FILES := all
   PRODUCT_MANUFACTURER := Google
-  PRODUCT_BRAND := Android
---- 33,39 ----
-      device/google/crosshatch/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-      frameworks/native/data/etc/aosp_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/aosp_excluded_hardware.xml
-  
+--- 38,46 ----
+  $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_vendor.mk)
+  $(call inherit-product, device/google/crosshatch/device-crosshatch.mk)
+  $(call inherit-product-if-exists, vendor/google_devices/crosshatch/proprietary/device-vendor.mk)
+! PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+! frameworks/native/data/etc/aosp_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/aosp_excluded_hardware.xml
 ! PRODUCT_RESTRICT_VENDOR_FILES := false
-  
+  # STOPSHIP deal with Qualcomm stuff later
+  # PRODUCT_RESTRICT_VENDOR_FILES := all
   PRODUCT_MANUFACTURER := Google
-  PRODUCT_BRAND := Android
-*** a/device/google/crosshatch/device-crosshatch.mk	2019-10-22 00:40:47.000000000 -0300
---- b/device/google/crosshatch/device-crosshatch.mk	2019-10-22 00:42:08.511326668 -0300
+*** a/device/google/crosshatch/device-crosshatch.mk  2020-01-04 05:26:33.197519900 -0500
+--- b/device/google/crosshatch/device-crosshatch     2020-01-04 05:27:00.768521000 -0500
 ***************
-*** 14,19 ****
---- 14,21 ----
+*** 13,18 ****
+--- 13,19 ----
+  # See the License for the specific language governing permissions and
   # limitations under the License.
   #
-  
-+ GAPPS_VARIANT := nano
-+ 
-  PRODUCT_AAPT_CONFIG := normal
-  PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-  PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
++ GAPPS_VARIANT := pico
+  PRODUCT_HARDWARE := crosshatch
+  include device/google/crosshatch/device-common.mk
+  DEVICE_PACKAGE_OVERLAYS += device/google/crosshatch/crosshatch/overlay
 ***************
-*** 40,42 ****
---- 42,46 ----
-  # Thermal HAL
+*** 26,29 ****
   PRODUCT_COPY_FILES += \
-      device/google/crosshatch/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
-+ 
-+ $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+      device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+  PRODUCT_PACKAGES += \
+!     NoCutoutOverlay
+\ No newline at end of file
+--- 27,31 ----
+  PRODUCT_COPY_FILES += \
+      device/google/crosshatch/nfc/libnfc-nxp.crosshatch.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf
+  PRODUCT_PACKAGES += \
+!     NoCutoutOverlay
+! $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+\ No newline at end of file
