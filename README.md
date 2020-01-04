@@ -1,5 +1,5 @@
 # rattlesnakeos-patches
-My patches for Rattlesnake OS.
+Corrmaan patches for Rattlesnake OS. Forked for crosshatch.
 
 ## opengapps
 Note that building opengapps with Rattlesnake OS will require a larger EC2 volume size. By default it's set to 200 GB, but can be increased by editing the value of the `VolumeSize` key in `templates/lambda_template.go`. 300 worked for me.
