@@ -4,9 +4,7 @@ Corrmaan patches for Rattlesnake OS. Forked for crosshatch.
 ## opengapps
 Note that building opengapps with Rattlesnake OS will require a larger EC2 volume size. By default it's set to 200 GB, but can be increased by editing the value of the `VolumeSize` key in `templates/lambda_template.go`. 300 worked for me.
 
-As well, opengapps' aosp_build requires `zlib`. I created a script to install it, available at https://github.com/corrmaan/rattlesnakeos-scripts.
-
-I have only tested this on my Pixel 2 (walleye), hence the specific patch for this device. PRs are welcome for other supported devices and/or a more generic patch.
+As well, opengapps' aosp_build requires `zlib`. Script to install it is available at https://github.com/corrmaan/rattlesnakeos-scripts.
 
 Remember to add the following to your `~/.rattlesnakeos.toml` config file, following the instructions for the OpenGApps AOSP based build system (https://github.com/opengapps/aosp_build):
 
