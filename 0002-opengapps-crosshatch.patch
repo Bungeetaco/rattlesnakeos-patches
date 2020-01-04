@@ -1,8 +1,8 @@
-*** a/device/google/muskie/aosp_walleye.mk	2019-08-20 23:38:14.000000000 -0300
---- b/device/google/muskie/aosp_walleye.mk	2019-08-20 23:45:46.722647171 -0300
+*** a/device/google/crosshatch/aosp_walleye.mk	2019-08-20 23:38:14.000000000 -0300
+--- b/device/google/crosshatch/aosp_walleye.mk	2019-08-20 23:45:46.722647171 -0300
 ***************
 *** 33,39 ****
-      device/google/muskie/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+      device/google/crosshatch/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
       frameworks/native/data/etc/aosp_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/aosp_excluded_hardware.xml
   
 ! PRODUCT_RESTRICT_VENDOR_FILES := owner
@@ -10,22 +10,22 @@
   PRODUCT_MANUFACTURER := Google
   PRODUCT_BRAND := Android
 --- 33,39 ----
-      device/google/muskie/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+      device/google/crosshatch/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
       frameworks/native/data/etc/aosp_excluded_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/aosp_excluded_hardware.xml
   
 ! PRODUCT_RESTRICT_VENDOR_FILES := false
   
   PRODUCT_MANUFACTURER := Google
   PRODUCT_BRAND := Android
-*** a/device/google/muskie/device-walleye.mk	2019-10-22 00:40:47.000000000 -0300
---- b/device/google/muskie/device-walleye.mk	2019-10-22 00:42:08.511326668 -0300
+*** a/device/google/crosshatch/device-walleye.mk	2019-10-22 00:40:47.000000000 -0300
+--- b/device/google/crosshatch/device-walleye.mk	2019-10-22 00:42:08.511326668 -0300
 ***************
 *** 14,19 ****
 --- 14,21 ----
   # limitations under the License.
   #
   
-+ GAPPS_VARIANT := pico
++ GAPPS_VARIANT := nano
 + 
   PRODUCT_AAPT_CONFIG := normal
   PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -35,6 +35,6 @@
 --- 42,46 ----
   # Thermal HAL
   PRODUCT_COPY_FILES += \
-      device/google/muskie/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
+      device/google/crosshatch/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
 + 
 + $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
