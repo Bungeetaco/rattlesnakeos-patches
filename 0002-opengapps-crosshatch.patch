@@ -9,7 +9,7 @@
  # STOPSHIP deal with Qualcomm stuff later
  # PRODUCT_RESTRICT_VENDOR_FILES := all
 --- a/device/google/crosshatch/device-crosshatch.mk	2020-01-04 11:42:41.097071133 +0000
-+++ b/device/google/crosshatch/device-crosshatch.mk.2	2020-01-04 11:44:47.964147383 +0000
++++ b/device/google/crosshatch/device-crosshatch.mk	2020-01-04 11:44:47.964147383 +0000
 @@ -14,6 +14,7 @@
  # limitations under the License.
  #
