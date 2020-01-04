@@ -1,5 +1,5 @@
-*** a/device/google/crosshatch/aosp_walleye.mk	2019-08-20 23:38:14.000000000 -0300
---- b/device/google/crosshatch/aosp_walleye.mk	2019-08-20 23:45:46.722647171 -0300
+*** a/device/google/crosshatch/aosp_crosshatch.mk	2019-08-20 23:38:14.000000000 -0300
+--- b/device/google/crosshatch/aosp_crosshatch.mk	2019-08-20 23:45:46.722647171 -0300
 ***************
 *** 33,39 ****
       device/google/crosshatch/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
@@ -17,8 +17,8 @@
   
   PRODUCT_MANUFACTURER := Google
   PRODUCT_BRAND := Android
-*** a/device/google/crosshatch/device-walleye.mk	2019-10-22 00:40:47.000000000 -0300
---- b/device/google/crosshatch/device-walleye.mk	2019-10-22 00:42:08.511326668 -0300
+*** a/device/google/crosshatch/device-crosshatch.mk	2019-10-22 00:40:47.000000000 -0300
+--- b/device/google/crosshatch/device-crosshatch.mk	2019-10-22 00:42:08.511326668 -0300
 ***************
 *** 14,19 ****
 --- 14,21 ----
