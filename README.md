@@ -12,9 +12,9 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file, follo
 [[custom-patches]]
   repo = "https://github.com/Bungeetaco/rattlesnakeos-patches"
   patches = [
-      "0001-magisk_mkbootfs.patch",
-      "0002-opengapps-crosshatch.patch",
-      "0003-enable-doze-mode.patch",
+      "0001-magisk-mkbootfs.patch",
+      "0002-enable-doze-mode.patch",
+      "0003-opengapps-crosshatch.patch",
       "0004-opengapps-find-apk-for-pkg.patch",
       "0005-opengapps-prebuilt-apk.patch",
   ]
