@@ -10,13 +10,3 @@
 +    LZ_DECOMPRESS_CMD="/usr/bin/lzip"
      LZ_DECOMPRESS_ARG="--decompress"
    fi;
- 
-@@ -171,7 +171,7 @@
-     return 1 # Package does not exist for this arch.
-   fi
-   
--  for apidir in $(ls -vr "$1/$2/"*"app/$3"); do
-+  for apidir in $(/bin/ls -vr "$1/$2/"*"app/$3"); do
-     if [ "$apidir" -le "$4" ]; then
-       appapidir=$(echo "$1/$2/"*"app/$3/$apidir")
-       return 0
