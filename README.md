@@ -9,5 +9,4 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
   patches = [
       "0001-enable-doze-mode.patch",
   ]
-  
 ````
