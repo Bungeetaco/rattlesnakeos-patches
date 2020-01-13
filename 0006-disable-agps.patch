@@ -1,0 +1,23 @@
+diff --git a/a/crosshatch/gps.conf b/b/crosshatch/gps.conf
+index 74578b6..d49a8f9 100644
+--- a/a/crosshatch/gps.conf
++++ b/b/crosshatch/gps.conf
+@@ -44,6 +44,9 @@ CAPABILITIES=0x37
+ # of b1000001010 makes 3 slots available
+ # and the remaining 7 slots unwritable.
+ # AGPS_CERT_WRITABLE_MASK=0
++SUPL_HOST = 127.0.0.1
++SUPL_PORT = 9999
++SUPL_MODE = 0
+ 
+ ################################
+ # EXTRA SETTINGS
+@@ -86,7 +89,7 @@ SGLTE_TARGET=0
+ #     GPS_LOCK
+ # 0: disable
+ # 1: enable
+-AGPS_CONFIG_INJECT = 1
++AGPS_CONFIG_INJECT = 0
+ 
+ # AP Coarse Timestamp Uncertainty
+ ##################################################
