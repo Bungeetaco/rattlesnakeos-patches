@@ -8,5 +8,13 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
   repo = "https://github.com/Bungeetaco/rattlesnakeos-patches"
   patches = [
       "0001-enable-doze-mode.patch",
+      "0002-increase-default-maximum-password-length.patch",
+      "0003-Enable-WiFi-and-4G-calling.patch",
+      "0004-disable-menu-entries-in-recovery.patch",
+      "0005-do-not-require-strong-auth-on-regular-time-interval.patch",
+      "0006-disable-agps.patch",
+      "0007-set-cloudflare-dns-default.patch",
+      "0008-increase-binder-proxy-counting-watermarks.patch",
+      "0009-backup-any-app.patch",
   ]
 ````
