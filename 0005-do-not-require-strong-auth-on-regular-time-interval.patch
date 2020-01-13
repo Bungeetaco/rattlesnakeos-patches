@@ -1,4 +1,4 @@
-diff --git a/a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java b/b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
+diff --git a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
 index 12d3c59..1a4966b 100644
 --- a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
 +++ b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
@@ -11,7 +11,7 @@ index 12d3c59..1a4966b 100644
  
      /**
       * A {@link android.os.Parcelable} extra of type {@link android.os.PersistableBundle} that
-diff --git a/a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java b/b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
+diff --git a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
 index a84306c..3731494 100644
 --- a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
 +++ b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
