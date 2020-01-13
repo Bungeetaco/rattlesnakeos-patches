@@ -1,7 +1,7 @@
-diff --git a/a/frameworks/base/core/res/res/values/config.xml b/b/frameworks/base/core/res/res/values/config.xml
+diff --git a/frameworks/base/core/res/res/values/config.xml b/frameworks/base/core/res/res/values/config.xml
 index 04d1eef..199305b 100644
---- a/a/frameworks/base/core/res/res/values/config.xml
-+++ b/b/frameworks/base/core/res/res/values/config.xml
+--- a/frameworks/base/core/res/res/values/config.xml
++++ b/frameworks/base/core/res/res/values/config.xml
 @@ -225,7 +225,7 @@
           dozing).  This should be enabled if you have such services and expect apps to
           correctly use them when installed on your device.  Otherwise, keep this disabled
