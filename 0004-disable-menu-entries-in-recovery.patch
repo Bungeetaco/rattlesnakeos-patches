@@ -8,15 +8,11 @@ Subject: [PATCH] Disable menu entries in recovery
 * View recovery logs
 * Run graphics test
 
----
- bootable/recovery/recovery_ui/device.cpp | 4 ----
- 1 file changed, 4 deletions(-)
-
-diff --git a/recovery_ui/device.cpp b/recovery_ui/device.cpp
-index e7ae1a3..09b3944 100644
---- a/bootable/recovery/recovery_ui/device.cpp
-+++ b/bootable/recovery/recovery_ui/device.cpp
-@@ -31,11 +31,7 @@ static std::vector<std::pair<std::string, Device::BuiltinAction>> g_menu_actions
+diff --git a/a/recovery/recovery_ui/device.cpp b/b/recovery/recovery_ui/device.cpp
+index d46df92..3fc69cb 100644
+--- a/a/recovery/recovery_ui/device.cpp
++++ b/b/recovery/recovery_ui/device.cpp
+@@ -32,11 +32,7 @@ static std::vector<std::pair<std::string, Device::BuiltinAction>> g_menu_actions
    { "Enter fastboot", Device::ENTER_FASTBOOT },
    { "Apply update from ADB", Device::APPLY_ADB_SIDELOAD },
    { "Apply update from SD card", Device::APPLY_SDCARD },
