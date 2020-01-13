@@ -1,0 +1,20 @@
+diff --git a/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java b/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java
+index 2af04ae..b785ffa 100644
+--- a/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java
++++ b/frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java
+@@ -517,13 +517,13 @@ public class ActivityManagerService extends IActivityManager.Stub
+      * The number of binder proxies we need to have before we start warning and
+      * dumping debug info.
+      */
+-    private static final int BINDER_PROXY_HIGH_WATERMARK = 6000;
++    private static final int BINDER_PROXY_HIGH_WATERMARK = 18000;
+ 
+     /**
+      * Low watermark that needs to be met before we consider dumping info again,
+      * after already hitting the high watermark.
+      */
+-    private static final int BINDER_PROXY_LOW_WATERMARK = 5500;
++    private static final int BINDER_PROXY_LOW_WATERMARK = 16500;
+ 
+     /**
+      * State indicating that there is no need for any blocking for network.
