@@ -1,7 +1,7 @@
-diff --git a/a/crosshatch/gps.conf b/b/crosshatch/gps.conf
+diff --git a/crosshatch/gps.conf b/crosshatch/gps.conf
 index 74578b6..d49a8f9 100644
---- a/a/crosshatch/gps.conf
-+++ b/b/crosshatch/gps.conf
+--- a/crosshatch/gps.conf
++++ b/crosshatch/gps.conf
 @@ -44,6 +44,9 @@ CAPABILITIES=0x37
  # of b1000001010 makes 3 slots available
  # and the remaining 7 slots unwritable.
