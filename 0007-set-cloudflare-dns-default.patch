@@ -1,0 +1,22 @@
+diff --git a/frameworks/base/core/res/res/values/config.xml b/frameworks/base/core/res/res/values/config.xml
+index 04d1eef..4f38ac3 100644
+--- a/frameworks/base/core/res/res/values/config.xml
++++ b/frameworks/base/core/res/res/values/config.xml
+@@ -433,7 +433,7 @@
+          -->
+     <string-array translatable="false" name="config_ethernet_interfaces">
+         <!--
+-        <item>eth1;12,13,14,15;ip=192.168.0.10/24 gateway=192.168.0.1 dns=4.4.4.4,8.8.8.8</item>
++        <item>eth1;12,13,14,15;ip=192.168.0.10/24 gateway=192.168.0.1 dns=1.0.0.1,1.1.1.1</item>
+         <item>eth2;;ip=192.168.0.11/24</item>
+         <item>eth3;12,13,14,15;ip=192.168.0.12/24;1</item>
+         -->
+@@ -2056,7 +2056,7 @@
+     <bool name="config_bluetooth_default_profiles">true</bool>
+ 
+     <!-- IP address of the dns server to use if nobody else suggests one -->
+-    <string name="config_default_dns_server" translatable="false">8.8.8.8</string>
++    <string name="config_default_dns_server" translatable="false">1.1.1.1</string>
+ 
+     <!-- The default mobile provisioning apn. Empty by default, maybe overridden by
+          an mcc/mnc specific config.xml -->
