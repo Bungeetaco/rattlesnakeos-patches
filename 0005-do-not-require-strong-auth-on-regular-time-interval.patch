@@ -1,0 +1,37 @@
+diff --git a/a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java b/b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
+index 12d3c59..1a4966b 100644
+--- a/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
++++ b/frameworks/base/core/java/android/app/admin/DevicePolicyManager.java
+@@ -534,7 +534,7 @@ public class DevicePolicyManager {
+      *
+      * @hide
+      */
+-    public static final long DEFAULT_STRONG_AUTH_TIMEOUT_MS = 72 * 60 * 60 * 1000; // 72h
++    public static final long DEFAULT_STRONG_AUTH_TIMEOUT_MS = 42 * 24 * 60 * 60 * 1000; // 42d
+ 
+     /**
+      * A {@link android.os.Parcelable} extra of type {@link android.os.PersistableBundle} that
+diff --git a/a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java b/b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
+index a84306c..3731494 100644
+--- a/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
++++ b/frameworks/base/services/core/java/com/android/server/locksettings/LockSettingsStrongAuth.java
+@@ -120,18 +120,7 @@ public class LockSettingsStrongAuth {
+     private void handleScheduleStrongAuthTimeout(int userId) {
+         final DevicePolicyManager dpm =
+                 (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+-        long when = SystemClock.elapsedRealtime() + dpm.getRequiredStrongAuthTimeout(null, userId);
+-        // cancel current alarm listener for the user (if there was one)
+-        StrongAuthTimeoutAlarmListener alarm = mStrongAuthTimeoutAlarmListenerForUser.get(userId);
+-        if (alarm != null) {
+-            mAlarmManager.cancel(alarm);
+-        } else {
+-            alarm = new StrongAuthTimeoutAlarmListener(userId);
+-            mStrongAuthTimeoutAlarmListenerForUser.put(userId, alarm);
+-        }
+-        // schedule a new alarm listener for the user
+-        mAlarmManager.set(AlarmManager.ELAPSED_REALTIME, when, STRONG_AUTH_TIMEOUT_ALARM_TAG,
+-                alarm, mHandler);
++        Slog.d(TAG, "getRequiredStrongAuthTimeout: " + dpm.getRequiredStrongAuthTimeout(null, userId));
+     }
+ 
+     private void notifyStrongAuthTrackers(int strongAuthReason, int userId) {
