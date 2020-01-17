@@ -16,6 +16,6 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
       "0007-set-cloudflare-dns-default.patch",
       "0008-increase-binder-proxy-counting-watermarks.patch",
       "0009-backup-any-app.patch",
-      "0010-allow-unifiednlp-location-provider.patch",
+      "0010-cosmetical-changes.patch",
   ]
 ````
