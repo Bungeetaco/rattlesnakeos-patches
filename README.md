@@ -5,7 +5,7 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
 
 ````toml
 [[custom-patches]]
-  repo = "https://github.com/Bungeetaco/rattlesnakeos-patches"
+  repo = "https://github.com/Bungeetaco/ros-patches"
   patches = [
       "0001-enable-doze-mode.patch",
       "0002-increase-default-maximum-password-length.patch",
