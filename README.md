@@ -21,3 +21,6 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
       "0012-internet-permission.patch",
   ]
 ````
+
+You can also find my pre-builts for AuroraStore/AuroraDroid/AuroraServices/Seedvault @ https://gitlab.com/Bungeetaco/ros-prebuilts/
+and my custom bootanimation over at https://github.com/Bungeetaco/ros-scripts
