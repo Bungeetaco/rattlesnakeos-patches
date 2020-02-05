@@ -7,7 +7,7 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
 [[custom-patches]]
   repo = "https://github.com/Bungeetaco/ros-patches"
   patches = [
-      "0001-enable-doze-mode.patch",
+      "0001-round-icons.patch",
       "0002-increase-default-maximum-password-length.patch",
       "0003-Enable-WiFi-and-4G-calling.patch",
       "0004-disable-menu-entries-in-recovery.patch",
