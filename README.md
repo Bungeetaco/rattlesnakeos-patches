@@ -17,5 +17,6 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
       "0008-increase-binder-proxy-counting-watermarks.patch",
       "0009-backup-any-app.patch",
       "0010-cosmetical-changes.patch",
+      "0011-internet-permission.patch",
   ]
 ````
