@@ -18,5 +18,6 @@ Remember to add the following to your `~/.rattlesnakeos.toml` config file:
       "0009-backup-any-app.patch",
       "0010-cosmetical-changes.patch",
       "0011-set-seedvault-as-dftl-bkp-provider.patch"
+      "0012-internet-permission.patch",
   ]
 ````
