@@ -1,0 +1,298 @@
+diff --git a/packages/apps/Settings/res/values/arrays.xml b/packages/apps/Settings/res/values/arrays.xml
+index 9424807..08007ab 100644
+--- a/packages/apps/Settings/res/values/arrays.xml
++++ b/packages/apps/Settings/res/values/arrays.xml
+@@ -114,6 +114,16 @@
+         <item>30 minutes</item>
+     </string-array>
+ 
++    <string-array name="scramble_pin_entries">
++        <item>Scramble PIN</item>
++        <item>No PIN scrambling</item>
++    </string-array>
++
++    <string-array name="scramble_pin_values" translatable="false">
++        <item>true</item>
++        <item>false</item>
++    </string-array>
++
+     <!-- Do not translate. -->
+     <string-array name="lock_after_timeout_values" translatable="false">
+         <!-- Do not translate. -->
+
+diff --git a/packages/apps/Settings/res/values/strings.xml b/packages/apps/Settings/res/values/strings.xml
+index 4ae16d6..b8c7234 100644
+--- a/packages/apps/Settings/res/values/strings.xml
++++ b/packages/apps/Settings/res/values/strings.xml
+@@ -11240,4 +11240,7 @@
+     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
+     <string name="work_policy_privacy_settings_summary">Settings managed by your IT admin</string>
+ 
++    <string name="scramble_pin_title">PIN scrambling</string>
++    <string name="scramble_pin_summary">Controls PIN scrambling option when inputting PIN on screen lock.</string>
++
+ </resources>
+
+diff --git a/packages/apps/Settings/res/xml/security_dashboard_settings.xml b/packages/apps/Settings/res/xml/security_dashboard_settings.xml
+index 6a896ce..a10a002 100644
+--- a/packages/apps/Settings/res/xml/security_dashboard_settings.xml
++++ b/packages/apps/Settings/res/xml/security_dashboard_settings.xml
+@@ -20,7 +20,7 @@
+     xmlns:settings="http://schemas.android.com/apk/res-auto"
+     android:key="security_dashboard_page"
+     android:title="@string/security_settings_title"
+-    settings:initialExpandedChildrenCount="9">
++    settings:initialExpandedChildrenCount="10">
+ 
+     <!-- security_settings_status.xml -->
+     <PreferenceCategory
+@@ -55,6 +55,15 @@
+             android:title="@string/security_settings_face_preference_title"
+             android:summary="@string/summary_placeholder"
+             settings:keywords="@string/keywords_face_settings" />
++
++        <ListPreference
++            android:key="scramble_pin_layout"
++            android:title="@string/scramble_pin_title"
++            android:summary="@string/scramble_pin_summary"
++            android:persistent="false"
++            android:entries="@array/scramble_pin_entries"
++            android:entryValues="@array/scramble_pin_values" />
++
+     </PreferenceCategory>
+ 
+     <!-- work profile security section -->
+
+diff --git a/packages/apps/Settings/src/com/android/settings/security/SecuritySettings.java b/packages/apps/Settings/src/com/android/settings/security/SecuritySettings.java
+index 7c3391c..7ee5043 100644
+--- a/packages/apps/Settings/src/com/android/settings/security/SecuritySettings.java
++++ b/packages/apps/Settings/src/com/android/settings/security/SecuritySettings.java
+@@ -116,6 +116,7 @@ public class SecuritySettings extends DashboardFragment {
+         securityPreferenceControllers.add(new FaceStatusPreferenceController(context));
+         securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
+         securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
++        securityPreferenceControllers.add(new PinScramblePreferenceController(context));
+         controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY)
+                 .setChildren(securityPreferenceControllers));
+         controllers.addAll(securityPreferenceControllers);
+
+--- a/packages/apps/Settings/src/com/android/settings/security/PinScramblePreferenceController.java	1969-12-31 19:00:00.000000000 -0500
++++ b/packages/apps/Settings/src/com/android/settings/security/PinScramblePreferenceController.java	2020-02-05 15:12:03.116289000 -0500
+@@ -0,0 +1,79 @@
++package com.android.settings.security;
++
++import android.content.Context;
++
++import android.os.UserHandle;
++import android.os.UserManager;
++import android.os.SystemProperties;
++
++import android.provider.Settings;
++
++import androidx.preference.ListPreference;
++import androidx.preference.Preference;
++import androidx.preference.PreferenceCategory;
++import androidx.preference.PreferenceGroup;
++import androidx.preference.PreferenceScreen;
++
++import com.android.internal.widget.LockPatternUtils;
++import com.android.settings.core.PreferenceControllerMixin;
++import com.android.settingslib.core.AbstractPreferenceController;
++import com.android.settingslib.core.lifecycle.events.OnResume;
++
++public class PinScramblePreferenceController extends AbstractPreferenceController
++        implements PreferenceControllerMixin, OnResume, Preference.OnPreferenceChangeListener {
++
++    private static final String KEY_SCRAMBLE_PIN_LAYOUT = "scramble_pin_layout";
++    private static final String PREF_KEY_SECURITY_CATEGORY = "security_category";
++
++    private PreferenceCategory mSecurityCategory;
++    private ListPreference mScramblePin;
++
++    public PinScramblePreferenceController(Context context) {
++        super(context);
++    }
++
++    @Override
++    public void displayPreference(PreferenceScreen screen) {
++        super.displayPreference(screen);
++        mSecurityCategory = screen.findPreference(PREF_KEY_SECURITY_CATEGORY);
++        updatePreferenceState();
++    }
++
++    @Override
++    public boolean isAvailable() {
++        return true;
++    }
++
++    @Override
++    public String getPreferenceKey() {
++        return KEY_SCRAMBLE_PIN_LAYOUT;
++    }
++
++    // TODO: should we use onCreatePreferences() instead?
++    private void updatePreferenceState() {
++        if (mSecurityCategory == null) {
++            return;
++        }
++        mScramblePin = (ListPreference) mSecurityCategory.findPreference(KEY_SCRAMBLE_PIN_LAYOUT);
++        mScramblePin.setValue(Boolean.toString(Settings.System.getInt(mContext.getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT, 0) != 0));
++    }
++
++    @Override
++    public void onResume() {
++        updatePreferenceState();
++        if (mScramblePin != null) {
++            boolean mode = Boolean.parseBoolean(mScramblePin.getValue());
++            Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT, (mode) ? 0 : 1);
++        }
++    }
++
++    @Override
++    public boolean onPreferenceChange(Preference preference, Object value) {
++        final String key = preference.getKey();
++        if (KEY_SCRAMBLE_PIN_LAYOUT.equals(key)) {
++            boolean mode = Boolean.parseBoolean((String) value);
++            Settings.System.putInt(mContext.getContentResolver(), Settings.System.SCRAMBLE_PIN_LAYOUT, (mode) ? 1 : 0);
++        }
++        return true;
++    }
++}
+
+diff --git a/platform/frameworks/base/core/java/android/provider/Settings.java b/platform/frameworks/base/core/java/android/provider/Settings.java
+index b22db2e..1c1fe72 100644
+--- a/platform/frameworks/base/core/java/android/provider/Settings.java
++++ b/platform/frameworks/base/core/java/android/provider/Settings.java
+@@ -3378,6 +3378,14 @@ public final class Settings {
+         public static final String LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED =
+             "lock_pattern_tactile_feedback_enabled";
+ 
++        /**
++         * Whether to scramble a pin unlock layout
++         * @hide
++         */
++        public static final String SCRAMBLE_PIN_LAYOUT =
++            "lockscreen_scramble_pin_layout";
++
++        /**
+         /**
+          * A formatted string of the next alarm that is set, or the empty string
+          * if there is no alarm set.
+
+diff --git a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
+index 15d2ea7..c130706 100644
+--- a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
++++ b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
+@@ -17,10 +17,17 @@
+ package com.android.keyguard;
+ 
+ import android.content.Context;
++import android.provider.Settings;
+ import android.util.AttributeSet;
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.view.animation.AnimationUtils;
++import android.widget.LinearLayout;
++
++import java.security.SecureRandom;
++import java.util.Arrays;
++import java.util.Collections;
++import java.util.List;
+ 
+ import com.android.settingslib.animation.AppearAnimationUtils;
+ import com.android.settingslib.animation.DisappearAnimationUtils;
+@@ -119,6 +126,7 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
+                 mCallback.onCancelClicked();
+             });
+         }
++
+     }
+ 
+     @Override
+@@ -144,6 +152,28 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
+                         enableClipping(true);
+                     }
+                 });
++        boolean scramblePin = Settings.System.getInt(getContext().getContentResolver(),
++                Settings.System.SCRAMBLE_PIN_LAYOUT, 0) == 1;
++
++        if (scramblePin) {
++            List<Integer> digits = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
++            Collections.shuffle(digits, new SecureRandom());
++            LinearLayout container = (LinearLayout) findViewById(R.id.container);
++            int finished = 0;
++            for (int i = 0; i < container.getChildCount(); i++) {
++                if (container.getChildAt(i) instanceof LinearLayout) {
++                    LinearLayout nestedLayout = ((LinearLayout) container.getChildAt(i));
++                    for (int j = 0; j < nestedLayout.getChildCount(); j++){
++                        View view = nestedLayout.getChildAt(j);
++                        if (view.getClass() == NumPadKey.class) {
++                            NumPadKey key = (NumPadKey) view;
++                            key.setDigit(digits.get(finished));
++                            finished++;
++                        }
++                    }
++                }
++            }
++        }
+     }
+ 
+     @Override
+
+diff --git a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
+index ebdd8c6..76ba890 100644
+--- a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
++++ b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
+@@ -20,6 +20,7 @@ import android.content.Context;
+ import android.content.res.TypedArray;
+ import android.os.PowerManager;
+ import android.os.SystemClock;
++import android.provider.Settings;
+ import android.util.AttributeSet;
+ import android.view.HapticFeedbackConstants;
+ import android.view.LayoutInflater;
+@@ -102,14 +103,27 @@ public class NumPadKey extends ViewGroup {
+         mDigitText.setText(Integer.toString(mDigit));
+         mKlondikeText = (TextView) findViewById(R.id.klondike_text);
+ 
++        updateText();
++        a = context.obtainStyledAttributes(attrs, android.R.styleable.View);
++        if (!a.hasValueOrEmpty(android.R.styleable.View_background)) {
++            setBackground(mContext.getDrawable(R.drawable.ripple_drawable_pin));
++        }
++        a.recycle();
++        setContentDescription(mDigitText.getText().toString());
++    }
++
++    private void updateText() {
++        boolean scramblePin = Settings.System.getInt(getContext().getContentResolver(),
++                Settings.System.SCRAMBLE_PIN_LAYOUT, 0) == 1;
+         if (mDigit >= 0) {
++            mDigitText.setText(Integer.toString(mDigit));
+             if (sKlondike == null) {
+                 sKlondike = getResources().getStringArray(R.array.lockscreen_num_pad_klondike);
+             }
+             if (sKlondike != null && sKlondike.length > mDigit) {
+                 String klondike = sKlondike[mDigit];
+                 final int len = klondike.length();
+-                if (len > 0) {
++                if (len > 0 || scramblePin) {
+                     mKlondikeText.setText(klondike);
+                 } else {
+                     mKlondikeText.setVisibility(View.INVISIBLE);
+@@ -117,12 +131,9 @@ public class NumPadKey extends ViewGroup {
+             }
+         }
+ 
+-        a = context.obtainStyledAttributes(attrs, android.R.styleable.View);
+-        if (!a.hasValueOrEmpty(android.R.styleable.View_background)) {
+-            setBackground(mContext.getDrawable(R.drawable.ripple_drawable_pin));
+-        }
+-        a.recycle();
+-        setContentDescription(mDigitText.getText().toString());
++    public void setDigit(int digit) {
++        mDigit = digit;
++        updateText();
+     }
+ 
+     @Override
