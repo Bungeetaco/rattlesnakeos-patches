@@ -179,7 +179,7 @@ index b22db2e..1c1fe72 100644
           * A formatted string of the next alarm that is set, or the empty string
           * if there is no alarm set.
 
-diff --git a/frameworks/base/packages/SystemUI/src/com/android/keyguard/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java b/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
+diff --git a/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java b/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
 index 15d2ea7..c130706 100644
 --- a/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
 +++ b/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
@@ -240,7 +240,7 @@ index 15d2ea7..c130706 100644
      @Override
 
 diff --git a/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java b/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
-index ebdd8c6..76ba890 100644
+index ebdd8c6..622fe68 100644
 --- a/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
 +++ b/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
 @@ -20,6 +20,7 @@ import android.content.Context;
@@ -251,7 +251,7 @@ index ebdd8c6..76ba890 100644
  import android.util.AttributeSet;
  import android.view.HapticFeedbackConstants;
  import android.view.LayoutInflater;
-@@ -102,14 +103,27 @@ public class NumPadKey extends ViewGroup {
+@@ -102,27 +103,38 @@ public class NumPadKey extends ViewGroup {
          mDigitText.setText(Integer.toString(mDigit));
          mKlondikeText = (TextView) findViewById(R.id.klondike_text);
  
@@ -280,9 +280,10 @@ index ebdd8c6..76ba890 100644
                      mKlondikeText.setText(klondike);
                  } else {
                      mKlondikeText.setVisibility(View.INVISIBLE);
-@@ -117,12 +131,9 @@ public class NumPadKey extends ViewGroup {
+                 }
              }
          }
++    }
  
 -        a = context.obtainStyledAttributes(attrs, android.R.styleable.View);
 -        if (!a.hasValueOrEmpty(android.R.styleable.View_background)) {
