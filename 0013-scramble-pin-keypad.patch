@@ -159,10 +159,10 @@ index 7c3391c..7ee5043 100644
 +    }
 +}
 
-diff --git a/platform/frameworks/base/core/java/android/provider/Settings.java b/platform/frameworks/base/core/java/android/provider/Settings.java
+diff --git a/frameworks/base/core/java/android/provider/Settings.java b/frameworks/base/core/java/android/provider/Settings.java
 index b22db2e..1c1fe72 100644
---- a/platform/frameworks/base/core/java/android/provider/Settings.java
-+++ b/platform/frameworks/base/core/java/android/provider/Settings.java
+--- a/frameworks/base/core/java/android/provider/Settings.java
++++ b/frameworks/base/core/java/android/provider/Settings.java
 @@ -3378,6 +3378,14 @@ public final class Settings {
          public static final String LOCK_PATTERN_TACTILE_FEEDBACK_ENABLED =
              "lock_pattern_tactile_feedback_enabled";
@@ -179,10 +179,10 @@ index b22db2e..1c1fe72 100644
           * A formatted string of the next alarm that is set, or the empty string
           * if there is no alarm set.
 
-diff --git a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
+diff --git a/frameworks/base/packages/SystemUI/src/com/android/keyguard/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java b/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
 index 15d2ea7..c130706 100644
---- a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
-+++ b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
+--- a/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
++++ b/frameworks/base/packages/SystemUI/src/com/android/keyguard/KeyguardPINView.java
 @@ -17,10 +17,17 @@
  package com.android.keyguard;
  
@@ -239,10 +239,10 @@ index 15d2ea7..c130706 100644
  
      @Override
 
-diff --git a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
+diff --git a/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java b/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
 index ebdd8c6..76ba890 100644
---- a/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
-+++ b/platform/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
+--- a/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
++++ b/frameworks/base/packages/SystemUI/src/com/android/keyguard/NumPadKey.java
 @@ -20,6 +20,7 @@ import android.content.Context;
  import android.content.res.TypedArray;
  import android.os.PowerManager;
